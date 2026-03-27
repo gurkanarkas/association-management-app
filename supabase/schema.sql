@@ -31,7 +31,26 @@ CREATE TABLE IF NOT EXISTS finances (
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- Enable Row Level Security (optional but recommended)
+-- Enable Row Level Security
 ALTER TABLE members ENABLE ROW LEVEL SECURITY;
 ALTER TABLE events ENABLE ROW LEVEL SECURITY;
 ALTER TABLE finances ENABLE ROW LEVEL SECURITY;
+
+-- RLS Policies: allow authenticated users full access
+-- Members
+CREATE POLICY "Allow authenticated read members" ON members FOR SELECT TO authenticated USING (true);
+CREATE POLICY "Allow authenticated insert members" ON members FOR INSERT TO authenticated WITH CHECK (true);
+CREATE POLICY "Allow authenticated update members" ON members FOR UPDATE TO authenticated USING (true) WITH CHECK (true);
+CREATE POLICY "Allow authenticated delete members" ON members FOR DELETE TO authenticated USING (true);
+
+-- Events
+CREATE POLICY "Allow authenticated read events" ON events FOR SELECT TO authenticated USING (true);
+CREATE POLICY "Allow authenticated insert events" ON events FOR INSERT TO authenticated WITH CHECK (true);
+CREATE POLICY "Allow authenticated update events" ON events FOR UPDATE TO authenticated USING (true) WITH CHECK (true);
+CREATE POLICY "Allow authenticated delete events" ON events FOR DELETE TO authenticated USING (true);
+
+-- Finances
+CREATE POLICY "Allow authenticated read finances" ON finances FOR SELECT TO authenticated USING (true);
+CREATE POLICY "Allow authenticated insert finances" ON finances FOR INSERT TO authenticated WITH CHECK (true);
+CREATE POLICY "Allow authenticated update finances" ON finances FOR UPDATE TO authenticated USING (true) WITH CHECK (true);
+CREATE POLICY "Allow authenticated delete finances" ON finances FOR DELETE TO authenticated USING (true);

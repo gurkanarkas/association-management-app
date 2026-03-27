@@ -15,20 +15,20 @@ interface Finance {
   created_at?: string;
 }
 
-const emptyFinance: Omit<Finance, 'id' | 'created_at'> = {
+const getEmptyFinance = (): Omit<Finance, 'id' | 'created_at'> => ({
   description: '',
   amount: 0,
   type: 'income',
   category: '',
   date: new Date().toISOString().split('T')[0],
-};
+});
 
 export default function FinancesPage() {
   const [finances, setFinances] = useState<Finance[]>([]);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
   const [editingFinance, setEditingFinance] = useState<Finance | null>(null);
-  const [form, setForm] = useState(emptyFinance);
+  const [form, setForm] = useState(getEmptyFinance);
   const [filter, setFilter] = useState<'all' | 'income' | 'expense'>('all');
 
   useEffect(() => {
@@ -81,7 +81,7 @@ export default function FinancesPage() {
   }
 
   function resetForm() {
-    setForm(emptyFinance);
+    setForm(getEmptyFinance());
     setEditingFinance(null);
     setShowForm(false);
   }

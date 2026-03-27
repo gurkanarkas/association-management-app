@@ -15,20 +15,20 @@ interface Event {
   created_at?: string;
 }
 
-const emptyEvent: Omit<Event, 'id' | 'created_at'> = {
+const getEmptyEvent = (): Omit<Event, 'id' | 'created_at'> => ({
   title: '',
   description: '',
   date: new Date().toISOString().split('T')[0],
   location: '',
   status: 'upcoming',
-};
+});
 
 export default function EventsPage() {
   const [events, setEvents] = useState<Event[]>([]);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
   const [editingEvent, setEditingEvent] = useState<Event | null>(null);
-  const [form, setForm] = useState(emptyEvent);
+  const [form, setForm] = useState(getEmptyEvent);
 
   useEffect(() => {
     fetchEvents();
@@ -80,7 +80,7 @@ export default function EventsPage() {
   }
 
   function resetForm() {
-    setForm(emptyEvent);
+    setForm(getEmptyEvent());
     setEditingEvent(null);
     setShowForm(false);
   }

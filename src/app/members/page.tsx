@@ -15,20 +15,20 @@ interface Member {
   created_at?: string;
 }
 
-const emptyMember: Omit<Member, 'id' | 'created_at'> = {
+const getEmptyMember = (): Omit<Member, 'id' | 'created_at'> => ({
   name: '',
   email: '',
   phone: '',
   status: 'active',
   join_date: new Date().toISOString().split('T')[0],
-};
+});
 
 export default function MembersPage() {
   const [members, setMembers] = useState<Member[]>([]);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
   const [editingMember, setEditingMember] = useState<Member | null>(null);
-  const [form, setForm] = useState(emptyMember);
+  const [form, setForm] = useState(getEmptyMember);
   const [search, setSearch] = useState('');
 
   useEffect(() => {
@@ -81,7 +81,7 @@ export default function MembersPage() {
   }
 
   function resetForm() {
-    setForm(emptyMember);
+    setForm(getEmptyMember());
     setEditingMember(null);
     setShowForm(false);
   }
