@@ -57,25 +57,25 @@ export default function Dashboard() {
       change: 'Active members',
     },
     {
-      title: 'Upcoming Events',
+      title: 'Total Events',
       value: stats.events,
       icon: '📅',
       color: 'bg-purple-500',
-      change: 'Scheduled events',
+      change: 'All scheduled events',
     },
     {
       title: 'Total Income',
       value: `$${stats.income.toLocaleString()}`,
       icon: '💰',
       color: 'bg-green-500',
-      change: 'Revenue this year',
+      change: 'Total revenue',
     },
     {
       title: 'Total Expenses',
       value: `$${stats.expenses.toLocaleString()}`,
       icon: '📊',
       color: 'bg-red-500',
-      change: 'Expenses this year',
+      change: 'Total expenses',
     },
   ];
 
